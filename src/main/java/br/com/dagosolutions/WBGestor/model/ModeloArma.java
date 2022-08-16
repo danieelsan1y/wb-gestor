@@ -2,6 +2,7 @@ package br.com.dagosolutions.WBGestor.model;
 
 import br.com.dagosolutions.WBGestor.model.enums.Alma;
 import br.com.dagosolutions.WBGestor.model.enums.Tamanho;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,8 +18,10 @@ import java.util.List;
 @NoArgsConstructor
 
 public class ModeloArma {
+
     @Id
-    @Column(name = "id_modelo_arma", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_modelo_arma",length = 9)
     private Long id;
 
     @Column(name = "tamanho_modelo_arma")
@@ -28,7 +31,7 @@ public class ModeloArma {
     private int quantidadeDeCano;
 
     @Column(name = "alma_modelo_arma")
-    private Alma alma ;
+    private Alma alma;
 
     @Column(name = "calibre_modelo_arma")
     private String calibre;
@@ -48,7 +51,19 @@ public class ModeloArma {
     @Column(name = "preco_modelo_arma")
     private Double preco;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "modeloArma")
     private List<Arma> armas;
 
+    public ModeloArma(Tamanho tamanho, int quantidadeDeCano, Alma alma, String calibre, int capacidade, String marca, String modelo, String paisFabricacao, Double preco) {
+        this.tamanho = tamanho;
+        this.quantidadeDeCano = quantidadeDeCano;
+        this.alma = alma;
+        this.calibre = calibre;
+        this.capacidade = capacidade;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.paisFabricacao = paisFabricacao;
+        this.preco = preco;
+    }
 }

@@ -1,6 +1,6 @@
 package br.com.dagosolutions.WBGestor.model;
 
-import br.com.dagosolutions.WBGestor.model.enums.Status;
+import br.com.dagosolutions.WBGestor.model.enums.StatusArma;
 import lombok.*;
 
 import javax.persistence.*;
@@ -9,14 +9,15 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "tb_arma")
 @Data
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@ToString
 public class Arma {
 
+
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @Column(name = "id_arma")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_arma",length = 9)
     private Long id;
 
     @Column(name = "serie_arma")
@@ -32,7 +33,7 @@ public class Arma {
     private LocalDate dataSaida;
 
     @Column(name = "status_arma")
-    private Status status;
+    private StatusArma status;
 
     @ManyToOne
     @JoinColumn(name = "id_modelo_arma")
@@ -42,5 +43,76 @@ public class Arma {
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
+    public Arma(String serie, String cor, ModeloArma modeloArma) {
+        this.serie = serie;
+        this.cor = cor;
+        this.modeloArma = modeloArma;
+    }
 
+    public Arma(Long id, String serie, String cor, LocalDate dataEntrada, LocalDate dataSaida, StatusArma status, ModeloArma modeloArma, Cliente cliente) {
+        this.id = id;
+        this.serie = serie;
+        this.cor = cor;
+        this.dataEntrada = dataEntrada;
+        this.dataSaida = dataSaida;
+        this.status = status;
+        this.modeloArma = modeloArma;
+        this.cliente = cliente;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getSerie() {
+        return serie;
+    }
+
+    public void setSerie(String serie) {
+        this.serie = serie;
+    }
+
+    public String getCor() {
+        return cor;
+    }
+
+    public void setCor(String cor) {
+        this.cor = cor;
+    }
+
+    public LocalDate getDataEntrada() {
+        return dataEntrada;
+    }
+
+    public void setDataEntrada(LocalDate dataEntrada) {
+        this.dataEntrada = dataEntrada;
+    }
+
+    public LocalDate getDataSaida() {
+        return dataSaida;
+    }
+
+    public void setDataSaida(LocalDate dataSaida) {
+        this.dataSaida = dataSaida;
+    }
+
+    public StatusArma getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusArma status) {
+        this.status = status;
+    }
+
+    public ModeloArma getModeloArma() {
+        return modeloArma;
+    }
+
+    public void setModeloArma(ModeloArma modeloArma) {
+        this.modeloArma = modeloArma;
+    }
 }

@@ -1,9 +1,10 @@
 package br.com.dagosolutions.WBGestor.model;
 
-import br.com.dagosolutions.WBGestor.model.enums.Tipo;
+import br.com.dagosolutions.WBGestor.model.enums.TipoMunicao;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_municao")
@@ -17,18 +18,25 @@ public class Municao {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "lote_municao")
-    private String lote;
+    @Column(name = "marca_municao")
+    private String marca;
 
-    @Column(name = "quantidade_municao")
-    private Long quantidade;
+    @Column(name = "calibre_municao")
+    private String calibre;
+
+    @Column(name = "projetil_municao")
+    private String projetil;
+
+    @Column(name = "peso_municao")
+    private Double peso;
 
     @Column(name = "tipo_municao")
-    private Tipo tipo;
+    private TipoMunicao tipo;
 
     @ManyToOne
     @JoinColumn(name = "id_cliente")
     private Cliente cliente;
 
-
+    @OneToMany(mappedBy = "municao")
+    private List<Movimentacao> movimentacoes;
 }

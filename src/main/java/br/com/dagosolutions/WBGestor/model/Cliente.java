@@ -1,5 +1,6 @@
 package br.com.dagosolutions.WBGestor.model;
 
+import br.com.dagosolutions.WBGestor.model.enums.StatusCliente;
 import lombok.*;
 
 import javax.persistence.*;
@@ -20,6 +21,9 @@ public class Cliente {
 
     @Column(name = "nome_cliente")
     private String nome;
+
+    @Column(name = "status_cliente")
+    private StatusCliente statusCliente;
 
     @Column(name = "cpf_cliente")
     private String cpf;
@@ -44,5 +48,8 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente")
     private List<Municao> municoes;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Movimentacao> movimentacoes;
 
 }

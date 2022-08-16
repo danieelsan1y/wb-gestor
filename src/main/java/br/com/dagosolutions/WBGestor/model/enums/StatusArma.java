@@ -1,11 +1,16 @@
 package br.com.dagosolutions.WBGestor.model.enums;
 
-public enum Tamanho {
-    CURTA(0),
-    LONGA(1);
+public enum StatusArma {
+    DISPONIVEL(0),
+    VENDIDO_EM_ESTOQUE(1),
+    VENDIDO_E_RETIRADO(2),
+    ROUBADO(3),
+    DESATIVADO(4),
+    GARANTIA(5);
 
     private int code;
-    private Tamanho(int code) {
+
+    private StatusArma(int code) {
         this.code = code;
     }
 
@@ -13,8 +18,8 @@ public enum Tamanho {
         return code;
     }
 
-    public static Tamanho valueOf(int code) {
-        for (Tamanho value : Tamanho.values()) {
+    public static StatusArma valueOf(int code) {
+        for (StatusArma value : StatusArma.values()) {
             if (value.getCode() == code) {
                 return value;
             }

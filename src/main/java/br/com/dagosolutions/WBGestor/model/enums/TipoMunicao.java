@@ -1,11 +1,10 @@
 package br.com.dagosolutions.WBGestor.model.enums;
 
-public enum Tamanho {
-    CURTA(0),
-    LONGA(1);
+public enum TipoMunicao {
+    UNIDADE(0);
 
     private int code;
-    private Tamanho(int code) {
+    private TipoMunicao(int code) {
         this.code = code;
     }
 
@@ -13,8 +12,8 @@ public enum Tamanho {
         return code;
     }
 
-    public static Tamanho valueOf(int code) {
-        for (Tamanho value : Tamanho.values()) {
+    public static TipoMunicao valueOf(int code) {
+        for (TipoMunicao value : TipoMunicao.values()) {
             if (value.getCode() == code) {
                 return value;
             }

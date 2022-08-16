@@ -1,0 +1,39 @@
+package br.com.dagosolutions.WBGestor.model;
+
+import br.com.dagosolutions.WBGestor.model.enums.TipoMovimentacao;
+import lombok.*;
+
+
+import javax.persistence.*;
+import java.time.LocalDate;
+@Entity
+@Table(name = "tb_movimentacao")
+@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Movimentacao {
+
+    @Id
+    @Column(name = "id_movimentacao", nullable = false)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "id_municao")
+    private Municao municao;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
+
+    @Column(name = "tipo_movimentacao")
+    private TipoMovimentacao tipoMovimentacao;
+
+    @Column(name = "quantidade_movimentacao")
+    private int quantidade;
+
+    @Column(name = "data_movimentacao")
+    private LocalDate dataMovimentacao;
+
+}
