@@ -1,7 +1,7 @@
 package br.com.dagosolutions.WBGestor.model;
 
-import br.com.dagosolutions.WBGestor.model.enums.Alma;
-import br.com.dagosolutions.WBGestor.model.enums.Tamanho;
+import br.com.dagosolutions.WBGestor.model.enums.AlmaArma;
+import br.com.dagosolutions.WBGestor.model.enums.TamanhoArma;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -25,13 +25,13 @@ public class ModeloArma {
     private Long id;
 
     @Column(name = "tamanho_modelo_arma")
-    private Tamanho tamanho;
+    private TamanhoArma tamanhoArma;
 
     @Column(name = "quantidade_de_cano_modelo_arma")
     private int quantidadeDeCano;
 
     @Column(name = "alma_modelo_arma")
-    private Alma alma;
+    private AlmaArma almaArma;
 
     @Column(name = "calibre_modelo_arma")
     private String calibre;
@@ -55,10 +55,10 @@ public class ModeloArma {
     @OneToMany(mappedBy = "modeloArma")
     private List<Arma> armas;
 
-    public ModeloArma(Tamanho tamanho, int quantidadeDeCano, Alma alma, String calibre, int capacidade, String marca, String modelo, String paisFabricacao, Double preco) {
-        this.tamanho = tamanho;
+    public ModeloArma(TamanhoArma tamanhoArma, int quantidadeDeCano, AlmaArma almaArma, String calibre, int capacidade, String marca, String modelo, String paisFabricacao, Double preco) {
+        this.tamanhoArma = tamanhoArma;
         this.quantidadeDeCano = quantidadeDeCano;
-        this.alma = alma;
+        this.almaArma = almaArma;
         this.calibre = calibre;
         this.capacidade = capacidade;
         this.marca = marca;

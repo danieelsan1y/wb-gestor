@@ -1,60 +1,26 @@
-package br.com.dagosolutions.WBGestor.model;
+package br.com.dagosolutions.WBGestor.model.dto;
 
+import br.com.dagosolutions.WBGestor.model.Arma;
+import br.com.dagosolutions.WBGestor.model.Cliente;
+import br.com.dagosolutions.WBGestor.model.ModeloArma;
 import br.com.dagosolutions.WBGestor.model.enums.StatusArma;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "tb_arma")
-@ToString
-public class Arma {
+public class ArmaListarDTO {
 
-
-    private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_arma",length = 9)
     private Long id;
-
-    @Column(name = "serie_arma")
     private String serie;
-
-    @Column(name = "cor_arma")
     private String cor;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/mm/yyyy")
-    @Column(name = "data_entrada_arma")
     private LocalDate dataEntrada;
-
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/mm/yyyy")
-    @Column(name = "data_saida_arma")
     private LocalDate dataSaida;
-
-    @Column(name = "status_arma")
     private StatusArma status;
+    private String modeloArma;
+    private String cliente;
 
-    @ManyToOne
-    @JoinColumn(name = "id_modelo_arma")
-    private ModeloArma modeloArma;
-
-    @ManyToOne
-    @JoinColumn(name = "id_cliente")
-    private Cliente cliente;
-
-    public Arma() {
-    }
-
-    public Arma(String serie, String cor, ModeloArma modeloArma) {
-        this.serie = serie;
-        this.cor = cor;
-        this.modeloArma = modeloArma;
-    }
-
-    public Arma(Long id, String serie, String cor, LocalDate dataEntrada, LocalDate dataSaida, StatusArma status, ModeloArma modeloArma, Cliente cliente) {
+    public ArmaListarDTO(Long id, String serie, String cor, LocalDate dataEntrada, LocalDate dataSaida, StatusArma status, String modeloArma, String cliente) {
         this.id = id;
         this.serie = serie;
         this.cor = cor;
@@ -63,6 +29,17 @@ public class Arma {
         this.status = status;
         this.modeloArma = modeloArma;
         this.cliente = cliente;
+    }
+
+    public ArmaListarDTO(Arma arma) {
+        this.id = arma.getId();
+        this.serie = arma.getSerie();
+        this.cor = arma.getCor();
+        this.dataEntrada = arma.getDataEntrada();
+        this.dataSaida = arma.getDataSaida();
+        this.status = arma.getStatus();
+        this.modeloArma = arma.getModeloArma().getModelo();
+        this.cliente = arma.getCliente().getNome();
     }
 
     public Long getId() {
@@ -113,19 +90,19 @@ public class Arma {
         this.status = status;
     }
 
-    public ModeloArma getModeloArma() {
+    public String getModeloArma() {
         return modeloArma;
     }
 
-    public void setModeloArma(ModeloArma modeloArma) {
+    public void setModeloArma(String modeloArma) {
         this.modeloArma = modeloArma;
     }
 
-    public Cliente getCliente() {
+    public String getCliente() {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(String cliente) {
         this.cliente = cliente;
     }
 }

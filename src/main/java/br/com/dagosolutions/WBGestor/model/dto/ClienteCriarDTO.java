@@ -1,59 +1,46 @@
-package br.com.dagosolutions.WBGestor.model;
+package br.com.dagosolutions.WBGestor.model.dto;
 
+
+import br.com.dagosolutions.WBGestor.model.Arma;
+import br.com.dagosolutions.WBGestor.model.Movimentacao;
+import br.com.dagosolutions.WBGestor.model.Municao;
 import br.com.dagosolutions.WBGestor.model.enums.StatusCliente;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.*;
 
-import javax.persistence.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
-@Table(name = "tb_cliente")
-public class Cliente {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cliente", nullable = false)
+public class ClienteCriarDTO {
     private Long id;
 
-    @Column(name = "nome_cliente")
     private String nome;
-
-    @Column(name = "status_cliente")
-    private StatusCliente statusCliente;
-
-    @Column(name = "cpf_cliente")
+    private String statusCliente;
     private String cpf;
-
-    @Column(name = "data_de_nascimento_cliente")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataDeNacimento;
-
-    @Column(name = "endereco_cliente")
     private String endereco;
-
-    @Column(name = "telefone_cliente")
     private String telefone;
-
-    @Column(name = "cr_cliente")
     private String cr;
-
-    @Column(name = "validade_cr_cliente")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate validadeCR;
 
-    @OneToMany(mappedBy = "cliente")
-    private List<Arma> armas;
-
-    @OneToMany(mappedBy = "cliente")
-    private List<Municao> municoes;
-
-    @OneToMany(mappedBy = "cliente")
-    private List<Movimentacao> movimentacoes;
-
-    public Cliente() {
+    public ClienteCriarDTO() {
     }
 
-    public Cliente(Long id, String nome, String cpf, LocalDate dataDeNacimento, String endereco, String telefone, String cr, LocalDate validadeCR) {
+    public ClienteCriarDTO(Long id, String nome, String statusCliente, String cpf, LocalDate dataDeNacimento, String endereco, String telefone, String cr, LocalDate validadeCR) {
         this.id = id;
+        this.nome = nome;
+        this.statusCliente = statusCliente;
+        this.cpf = cpf;
+        this.dataDeNacimento = dataDeNacimento;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.cr = cr;
+        this.validadeCR = validadeCR;
+    }
+
+    public ClienteCriarDTO(String nome, String cpf, LocalDate dataDeNacimento, String endereco, String telefone, String cr, LocalDate validadeCR) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataDeNacimento = dataDeNacimento;
@@ -77,14 +64,6 @@ public class Cliente {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public StatusCliente getStatusCliente() {
-        return statusCliente;
-    }
-
-    public void setStatusCliente(StatusCliente statusCliente) {
-        this.statusCliente = statusCliente;
     }
 
     public String getCpf() {
@@ -135,11 +114,11 @@ public class Cliente {
         this.validadeCR = validadeCR;
     }
 
-    public List<Movimentacao> getMovimentacoes() {
-        return movimentacoes;
+    public String getStatusCliente() {
+        return statusCliente;
     }
 
-    public void setMovimentacoes(List<Movimentacao> movimentacoes) {
-        this.movimentacoes = movimentacoes;
+    public void setStatusCliente(String statusCliente) {
+        this.statusCliente = statusCliente;
     }
 }

@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class ModeloArmaMapper {
     private static  final ModelMapper MODEL_MAPPER = new ModelMapper();
 
-    public ModeloArmaDTO toModeloArmaCriarDTO(ModeloArma modeloArma) {
+    public ModeloArmaDTO toModeloArmaDTO(ModeloArma modeloArma) {
         return MODEL_MAPPER.map(modeloArma, ModeloArmaDTO.class);
     }
 

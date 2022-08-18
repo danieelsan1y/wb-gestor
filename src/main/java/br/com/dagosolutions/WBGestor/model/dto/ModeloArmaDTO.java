@@ -40,9 +40,9 @@ public class ModeloArmaDTO {
 
     public ModeloArmaDTO(ModeloArma modeloArma) {
         this.id = modeloArma.getId();
-        this.tamanho = String.valueOf(modeloArma.getTamanho());
+        this.tamanho = String.valueOf(modeloArma.getTamanhoArma());
         this.quantidadeDeCano = modeloArma.getQuantidadeDeCano();
-        this.alma = String.valueOf(modeloArma.getAlma());
+        this.alma = String.valueOf(modeloArma.getAlmaArma());
         this.calibre = modeloArma.getCalibre();
         this.capacidade = modeloArma.getCapacidade();
         this.marca = modeloArma.getMarca();

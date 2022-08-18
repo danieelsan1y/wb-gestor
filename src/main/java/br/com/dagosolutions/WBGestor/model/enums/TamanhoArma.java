@@ -1,11 +1,11 @@
 package br.com.dagosolutions.WBGestor.model.enums;
 
-public enum Alma {
-    LISA(0),
-    RAIADA(1);
+public enum TamanhoArma {
+    CURTA(0),
+    LONGA(1);
 
     private int code;
-    private Alma(int code) {
+    private TamanhoArma(int code) {
         this.code = code;
     }
 
@@ -13,8 +13,8 @@ public enum Alma {
         return code;
     }
 
-    public static Alma valueOf(int code) {
-        for (Alma value : Alma.values()) {
+    public static TamanhoArma valueOf(int code) {
+        for (TamanhoArma value : TamanhoArma.values()) {
             if (value.getCode() == code) {
                 return value;
             }
