@@ -2,16 +2,17 @@ package br.com.dagosolutions.WBGestor.controller;
 
 import br.com.dagosolutions.WBGestor.controller.mapper.ArmaMapper;
 import br.com.dagosolutions.WBGestor.model.Arma;
-import br.com.dagosolutions.WBGestor.model.dto.ArmaGerirDTO;
-import br.com.dagosolutions.WBGestor.model.dto.ArmaCriarDTO;
-import br.com.dagosolutions.WBGestor.model.dto.ArmaListarDTO;
+import br.com.dagosolutions.WBGestor.model.dto.*;
 import br.com.dagosolutions.WBGestor.service.ArmaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/arma")
@@ -43,10 +44,24 @@ public class ArmaController {
     }
 
     @GetMapping
-    ResponseEntity<List<ArmaListarDTO>> listarTodos() {
-        List<Arma> armas= armaService.listarTodos();
-        List<ArmaListarDTO> armaListarDTOS = armaMapper.toArmaListarDTOList(armas);
-        return ResponseEntity.ok().body(armaListarDTOS);
+    ResponseEntity<Object> listarTodos() {
+        List<Arma> armasCompletas= armaService.listarTodosCompletos();
+        List<Arma> armasComClienteNuloDataNula= armaService.listarbuscarArmasComClienteNuloDataNula();
+        List<Arma> armasComDataNula= armaService.listarComDataNula();
+
+        List<ArmaListarNaoNulosDTO> armasCompletasDTO=
+                armaMapper.toArmaArmaListarNaoNulosDTOList(armasCompletas);
+        List<ArmaListarDataSaidaNuloClienteNuloDTO> armasComClienteNuloDataNulaDTO=
+                armaMapper.toArmaListarDataSaidaNuloClienteNuloDTOList(armasComClienteNuloDataNula);
+        List<ArmaListarDataNulaDTO> armasComDataNulaDTO=
+                armaMapper.toArmaListarDataNulaDTOList(armasComDataNula);
+
+
+        Set<ArmaListarNaoNulosDTO> todasArmas = new LinkedHashSet<>();
+        todasArmas.addAll(armasCompletasDTO);
+        todasArmas.addAll(armasComClienteNuloDataNulaDTO);
+        todasArmas.addAll(armasComDataNulaDTO);
+        return ResponseEntity.ok().body(todasArmas);
     }
 
 }

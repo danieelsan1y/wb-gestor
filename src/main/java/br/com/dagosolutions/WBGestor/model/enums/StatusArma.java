@@ -23,7 +23,6 @@ public enum StatusArma {
             if (value.getCode() == code) {
                 return value;
             }
-
         }
         throw new IllegalArgumentException("Invalid Order Status code!");
     }

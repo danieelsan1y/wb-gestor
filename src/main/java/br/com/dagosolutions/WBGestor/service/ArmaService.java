@@ -50,7 +50,15 @@ public class ArmaService {
     }
 
 
-    public List<Arma> listarTodos() {
-        return armaRepository.findAll();
+    public List<Arma> listarTodosCompletos() {
+        return armaRepository.buscarArmasSemCamposNulos();
+    }
+
+    public List<Arma> listarComDataNula() {
+        return armaRepository.buscarArmasComDataNula();
+    }
+
+    public List<Arma> listarbuscarArmasComClienteNuloDataNula() {
+        return armaRepository.buscarArmasComClienteNuloDataNula();
     }
 }

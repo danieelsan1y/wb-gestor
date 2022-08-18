@@ -1,26 +1,27 @@
 package br.com.dagosolutions.WBGestor.model.dto;
 
 import br.com.dagosolutions.WBGestor.model.Arma;
-import br.com.dagosolutions.WBGestor.model.Cliente;
-import br.com.dagosolutions.WBGestor.model.ModeloArma;
 import br.com.dagosolutions.WBGestor.model.enums.StatusArma;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-public class ArmaListarDTO {
+public class ArmaListarNaoNulosDTO {
 
     private Long id;
     private String serie;
     private String cor;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private LocalDate dataEntrada;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private LocalDate dataSaida;
     private StatusArma status;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String modeloArma;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String cliente;
 
-    public ArmaListarDTO(Long id, String serie, String cor, LocalDate dataEntrada, LocalDate dataSaida, StatusArma status, String modeloArma, String cliente) {
+    public ArmaListarNaoNulosDTO(Long id, String serie, String cor, LocalDate dataEntrada, LocalDate dataSaida, StatusArma status, String modeloArma, String cliente) {
         this.id = id;
         this.serie = serie;
         this.cor = cor;
@@ -28,19 +29,27 @@ public class ArmaListarDTO {
         this.dataSaida = dataSaida;
         this.status = status;
         this.modeloArma = modeloArma;
-        this.cliente = cliente;
+       this.cliente = cliente;
     }
 
-    public ArmaListarDTO(Arma arma) {
-        this.id = arma.getId();
-        this.serie = arma.getSerie();
-        this.cor = arma.getCor();
-        this.dataEntrada = arma.getDataEntrada();
-        this.dataSaida = arma.getDataSaida();
-        this.status = arma.getStatus();
-        this.modeloArma = arma.getModeloArma().getModelo();
-        this.cliente = arma.getCliente().getNome();
+    public ArmaListarNaoNulosDTO(Long id, String serie, String cor, LocalDate dataEntrada, StatusArma status, String modeloArma, String cliente) {
+        this.id = id;
+        this.serie = serie;
+        this.cor = cor;
+        this.dataEntrada = dataEntrada;
+        this.status = status;
+        this.modeloArma = modeloArma;
+        this.cliente = cliente;
     }
+    public ArmaListarNaoNulosDTO(Long id, String serie, String cor, LocalDate dataEntrada, StatusArma status, String modeloArma) {
+        this.id = id;
+        this.serie = serie;
+        this.cor = cor;
+        this.dataEntrada = dataEntrada;
+        this.status = status;
+        this.modeloArma = modeloArma;
+    }
+
 
     public Long getId() {
         return id;
