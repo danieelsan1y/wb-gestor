@@ -19,13 +19,7 @@ public class Movimentacao {
     @Column(name = "id_movimentacao", nullable = false)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "id_municao")
-    private Municao municao;
 
-    @ManyToOne
-    @JoinColumn(name = "id_cliente")
-    private Cliente cliente;
 
     @Column(name = "tipo_movimentacao")
     private TipoMovimentacao tipoMovimentacao;
@@ -35,5 +29,13 @@ public class Movimentacao {
 
     @Column(name = "data_movimentacao")
     private LocalDate dataMovimentacao;
+
+    @ManyToOne
+    @JoinColumn(name = "id_municao")
+    private Municao municao;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
 
 }

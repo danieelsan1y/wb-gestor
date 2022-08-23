@@ -8,5 +8,5 @@ import org.springframework.data.repository.query.Param;
 public interface ModeloArmaRepository extends JpaRepository<ModeloArma,Long> {
 
     @Query("SELECT m FROM ModeloArma m WHERE m.id = :id")
-    public ModeloArma findBYId(@Param("id") Long id);
+    public ModeloArma buscarPorId(@Param("id") Long id);
 }

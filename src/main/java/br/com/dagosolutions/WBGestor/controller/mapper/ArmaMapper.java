@@ -24,27 +24,12 @@ public class ArmaMapper {
         return MODEL_MAPPER.map(armaGerirDTO, Arma.class);
     }
 
-    public List<ArmaListarDataNulaDTO> toArmaListarDataNulaDTOList(List<Arma> armas) {
-        List<ArmaListarDataNulaDTO> armaListarDataNulaDTOS = armas.stream().map(arma -> new
-                ArmaListarDataNulaDTO(arma)).collect(Collectors.toList()
-        );
-        return armaListarDataNulaDTOS;
+    public ArmaListarDTO armaListarDTO(Arma arma) {
+        return MODEL_MAPPER.map(arma, ArmaListarDTO.class);
     }
 
-    public List<ArmaListarDataSaidaNuloClienteNuloDTO> toArmaListarDataSaidaNuloClienteNuloDTOList(List<Arma> armas) {
-        List<ArmaListarDataSaidaNuloClienteNuloDTO> armaListarDataSaidaNuloClienteNuloDTOS = armas.stream().map(arma -> new
-                ArmaListarDataSaidaNuloClienteNuloDTO(arma)).collect(Collectors.toList()
-        );
-        return armaListarDataSaidaNuloClienteNuloDTOS;
+    public List<ArmaListarDTO> toArmaDTOList(List<Arma> armas) {
+        List<ArmaListarDTO> armaListarDTOS = armas.stream().map(arma -> armaListarDTO(arma)).collect(Collectors.toList());
+        return armaListarDTOS;
     }
-
-    public List<ArmaListarNaoNulosDTO> toArmaArmaListarNaoNulosDTOList(List<Arma> armas) {
-        List<ArmaListarNaoNulosDTO> armaListarNaoNulosDTOS = armas.stream().map(arma -> new
-                ArmaListarNaoNulosDTO(arma.getId(), arma.getSerie(), arma.getCor(), arma.getDataEntrada(),arma.getDataSaida(),
-                arma.getStatus(),arma.getModeloArma().getModelo(),arma.getCliente().getNome())).collect(Collectors.toList()
-        );
-        return armaListarNaoNulosDTOS;
-    }
-
-
 }

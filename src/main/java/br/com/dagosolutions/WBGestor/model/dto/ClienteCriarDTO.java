@@ -50,6 +50,10 @@ public class ClienteCriarDTO {
         this.validadeCR = validadeCR;
     }
 
+    public ClienteCriarDTO(String statusCliente) {
+        this.statusCliente = statusCliente;
+    }
+
     public Long getId() {
         return id;
     }

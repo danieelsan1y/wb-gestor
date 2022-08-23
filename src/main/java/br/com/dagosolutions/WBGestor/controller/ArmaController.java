@@ -8,11 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/arma")
@@ -44,24 +40,17 @@ public class ArmaController {
     }
 
     @GetMapping
-    ResponseEntity<Object> listarTodos() {
-        List<Arma> armasCompletas= armaService.listarTodosCompletos();
-        List<Arma> armasComClienteNuloDataNula= armaService.listarbuscarArmasComClienteNuloDataNula();
-        List<Arma> armasComDataNula= armaService.listarComDataNula();
+    public ResponseEntity<List<ArmaListarDTO>> buscarArmas() {
+        List<Arma> armas= armaService.buscarTodas();
+        List<ArmaListarDTO> armaListarDTOS = armaMapper.toArmaDTOList(armas);
+        return ResponseEntity.ok().body(armaListarDTOS);
+    }
 
-        List<ArmaListarNaoNulosDTO> armasCompletasDTO=
-                armaMapper.toArmaArmaListarNaoNulosDTOList(armasCompletas);
-        List<ArmaListarDataSaidaNuloClienteNuloDTO> armasComClienteNuloDataNulaDTO=
-                armaMapper.toArmaListarDataSaidaNuloClienteNuloDTOList(armasComClienteNuloDataNula);
-        List<ArmaListarDataNulaDTO> armasComDataNulaDTO=
-                armaMapper.toArmaListarDataNulaDTOList(armasComDataNula);
-
-
-        Set<ArmaListarNaoNulosDTO> todasArmas = new LinkedHashSet<>();
-        todasArmas.addAll(armasCompletasDTO);
-        todasArmas.addAll(armasComClienteNuloDataNulaDTO);
-        todasArmas.addAll(armasComDataNulaDTO);
-        return ResponseEntity.ok().body(todasArmas);
+    @GetMapping("{id}")
+    ResponseEntity<ArmaListarDTO> buscarPorId(@PathVariable Long id) {
+        Arma arma= armaService.buscarPorId(id);
+        ArmaListarDTO armaListarDTOS = armaMapper.armaListarDTO(arma);
+        return ResponseEntity.ok().body(armaListarDTOS);
     }
 
 }

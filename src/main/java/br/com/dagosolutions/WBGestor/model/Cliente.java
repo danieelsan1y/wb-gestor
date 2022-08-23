@@ -142,4 +142,9 @@ public class Cliente {
     public void setMovimentacoes(List<Movimentacao> movimentacoes) {
         this.movimentacoes = movimentacoes;
     }
+
+    @Override
+    public String toString() {
+        return nome ;
+    }
 }

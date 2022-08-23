@@ -23,11 +23,11 @@ public class ModeloArmaService {
     }
 
     public void atualizar(Long id, ModeloArma modeloArma) {
-        ModeloArma modeloArmaAntigo = modeloArmaRepository.findBYId(id);
-        atualizarCapos(modeloArmaAntigo, modeloArma);
+        ModeloArma modeloArmaAntigo = modeloArmaRepository.buscarPorId(id);
+        atualizarCampos(modeloArmaAntigo, modeloArma);
     }
 
-    private void atualizarCapos(ModeloArma modeloArmaAntigo, ModeloArma modeloArma) {
+    private void atualizarCampos(ModeloArma modeloArmaAntigo, ModeloArma modeloArma) {
         modeloArmaAntigo.setModelo(modeloArma.getModelo());
         modeloArmaAntigo.setAlmaArma(modeloArma.getAlmaArma());
         modeloArmaAntigo.setTamanhoArma(modeloArma.getTamanhoArma());
@@ -38,5 +38,9 @@ public class ModeloArmaService {
         modeloArmaAntigo.setMarca(modeloArma.getMarca());
         modeloArmaAntigo.setQuantidadeDeCano(modeloArma.getQuantidadeDeCano());
         modeloArmaRepository.save(modeloArmaAntigo);
+    }
+
+    public ModeloArma buscarPorId(Long id) {
+        return modeloArmaRepository.buscarPorId(id);
     }
 }

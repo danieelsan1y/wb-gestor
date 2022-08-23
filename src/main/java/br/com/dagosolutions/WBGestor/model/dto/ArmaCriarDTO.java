@@ -7,10 +7,7 @@ public class ArmaCriarDTO {
     private  String cor;
     private Long modeloArma;
 
-    public ArmaCriarDTO(String serie, String cor, Long modeloArma) {
-        this.serie = serie;
-        this.cor = cor;
-        this.modeloArma = modeloArma;
+    public ArmaCriarDTO() {
     }
 
     public String getSerie() {

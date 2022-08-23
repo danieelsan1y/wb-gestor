@@ -8,7 +8,6 @@ import br.com.dagosolutions.WBGestor.repository.ArmaRepository;
 import br.com.dagosolutions.WBGestor.repository.ClienteRepository;
 import br.com.dagosolutions.WBGestor.repository.ModeloArmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -27,8 +26,7 @@ public class ArmaService {
     ClienteRepository clienteRepository;
 
     public void realizarEntrada(Arma arma, Long id) {
-
-        ModeloArma modeloArma = modeloArmaRepository.findBYId(id);
+        ModeloArma modeloArma = modeloArmaRepository.buscarPorId(id);
         arma.setModeloArma(modeloArma);
         arma.setDataEntrada(LocalDate.now());
         arma.setStatus(StatusArma.DISPONIVEL);
@@ -36,29 +34,23 @@ public class ArmaService {
     }
 
     public void gerir(Long id, Arma arma) {
-        Arma armaAntiga = armaRepository.findBYId(id);
+        Arma armaAntiga = armaRepository.buscarPorId(id);
         armaAntiga.setStatus(arma.getStatus());
-        Cliente cliente = clienteRepository.findBYId(arma.getCliente().getId());
+        Cliente cliente = clienteRepository.buscarPorId(arma.getCliente().getId());
         armaAntiga.setCliente(cliente);
         armaRepository.save(armaAntiga);
     }
     public void realizarSaida(Long id) {
-        Arma arma = armaRepository.findBYId(id);
+        Arma arma = armaRepository.buscarPorId(id);
         arma.setStatus(StatusArma.VENDIDO_E_RETIRADO);
         arma.setDataSaida(LocalDate.now());
         armaRepository.save(arma);
     }
-
-
-    public List<Arma> listarTodosCompletos() {
-        return armaRepository.buscarArmasSemCamposNulos();
+    public List<Arma> buscarTodas() {
+        return armaRepository.findAll();
     }
 
-    public List<Arma> listarComDataNula() {
-        return armaRepository.buscarArmasComDataNula();
-    }
-
-    public List<Arma> listarbuscarArmasComClienteNuloDataNula() {
-        return armaRepository.buscarArmasComClienteNuloDataNula();
+    public Arma buscarPorId(Long id) {
+        return armaRepository.buscarPorId(id);
     }
 }
