@@ -50,10 +50,16 @@ public class ClienteController {
         clienteService.atualizar(id, cliente);
         return ResponseEntity.ok().build();
     }
-    @PutMapping("status/{id}")
-    public ResponseEntity<Void> alterarSituacao (@RequestBody String status, @PathVariable Long id ) {
-        clienteService.alterarSituacao(status, id);
-       return  ResponseEntity.ok().build();
+    @PutMapping(value = "inativo/{id}")
+    ResponseEntity<Void> desativar(@PathVariable Long id) {
+        clienteService.desativar(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "ativo/{id}")
+    ResponseEntity<Void> ativar(@PathVariable Long id) {
+        clienteService.ativar(id);
+        return ResponseEntity.noContent().build();
     }
 
 

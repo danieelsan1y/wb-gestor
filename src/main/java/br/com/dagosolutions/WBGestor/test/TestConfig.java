@@ -9,6 +9,7 @@ import br.com.dagosolutions.WBGestor.model.Cliente;
 import br.com.dagosolutions.WBGestor.model.ModeloArma;
 import br.com.dagosolutions.WBGestor.model.enums.AlmaArma;
 import br.com.dagosolutions.WBGestor.model.enums.StatusArma;
+import br.com.dagosolutions.WBGestor.model.enums.StatusCliente;
 import br.com.dagosolutions.WBGestor.model.enums.TamanhoArma;
 import br.com.dagosolutions.WBGestor.repository.ArmaRepository;
 import br.com.dagosolutions.WBGestor.repository.ClienteRepository;
@@ -40,7 +41,7 @@ public class TestConfig implements CommandLineRunner {
         modeloArmaRepository.saveAll(Arrays.asList(modeloArma,modeloArma2));
 
         Cliente cliente = new Cliente(null,"Daniel","70254147855",LocalDate.now(),"AV1234","959999","02255",LocalDate.now());
-
+        cliente.setStatusCliente(StatusCliente.ATIVO);
 
         Arma arma = new Arma(null,"12345","PRETO", LocalDate.now(),LocalDate.now(), StatusArma.DISPONIVEL,modeloArma,cliente);
         Arma arma2 = new Arma(null,"15","ROSA",LocalDate.now(),null,StatusArma.DISPONIVEL,modeloArma,cliente);

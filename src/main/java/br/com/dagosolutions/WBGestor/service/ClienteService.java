@@ -44,9 +44,15 @@ public class ClienteService {
         clienteAntigo.setCr(cliente.getCr());
     }
 
-    public void alterarSituacao(String status, Long id) {
+    public void desativar(Long id) {
         Cliente cliente = clienteRepository.buscarPorId(id);
-        cliente.setStatusCliente(StatusCliente.valueOf(status));
+        cliente.setStatusCliente(StatusCliente.INATIVO);
+        clienteRepository.save(cliente);
+    }
+
+    public void ativar(Long id) {
+        Cliente cliente = clienteRepository.buscarPorId(id);
+        cliente.setStatusCliente(StatusCliente.ATIVO);
         clienteRepository.save(cliente);
     }
 }
